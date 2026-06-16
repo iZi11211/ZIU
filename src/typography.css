@@ -1,0 +1,30 @@
+:root {
+  /* nagłówki */
+  --font-h1: clamp(1.5rem, 4vw, 2.5rem);
+  --font-h2: clamp(1.25rem, 3vw, 2rem);
+
+  /* body */
+  --font-body: clamp(0.875rem, 1.2vw, 1.125rem);
+
+  /* mały tekst (metadane, badge, daty itd.) */
+  --font-small: clamp(0.75rem, 1vw, 0.9rem);
+}
+
+/* typografia globalna */
+h1 {
+  font-size: var(--font-h1);
+}
+
+h2 {
+  font-size: var(--font-h2);
+}
+
+body {
+  font-size: var(--font-body);
+}
+
+/* utility dla metadanych */
+.small-text {
+  font-size: var(--font-small);
+  color: #666;
+}

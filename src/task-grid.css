@@ -1,0 +1,21 @@
+.task-grid {
+  display: grid;
+
+  /* responsywna siatka bez media queries */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+/* karta obrazkowa / thumbnail */
+.task-card__thumbnail {
+  width: 100%;
+
+  /* proporcje 16:9 */
+  aspect-ratio: 16 / 9;
+
+  /* dopasowanie obrazu */
+  object-fit: cover;
+
+  border-radius: 8px;
+}
