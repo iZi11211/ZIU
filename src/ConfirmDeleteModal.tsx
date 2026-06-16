@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { FocusTrap } from './FocusTrap';
+import { FocusTrap } from './components/FocusTrap';
 
 export const ConfirmDeleteModal = ({
   open,

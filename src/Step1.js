@@ -1,0 +1,13 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useFormContext } from 'react-hook-form';
+export default function Step1() {
+    const { register, watch, formState: { errors }, } = useFormContext();
+    const password = watch('password');
+    // tylko SIŁA hasła – BEZ trigger
+    const strength = password?.length > 10
+        ? 'strong'
+        : password?.length > 6
+            ? 'medium'
+            : 'weak';
+    return (_jsxs("div", { className: "step", children: [_jsx("label", { htmlFor: "firstName", children: "Imi\u0119 *" }), _jsx("input", { id: "firstName", className: "register__input", "aria-required": "true", "aria-invalid": !!errors.firstName, "aria-describedby": "firstName-error", ...register('firstName') }), _jsx("span", { id: "firstName-error", role: "alert", className: "register__error", children: errors.firstName?.message }), _jsx("label", { htmlFor: "lastName", children: "Nazwisko *" }), _jsx("input", { id: "lastName", className: "register__input", "aria-required": "true", "aria-invalid": !!errors.lastName, "aria-describedby": "lastName-error", ...register('lastName') }), _jsx("span", { id: "lastName-error", role: "alert", className: "register__error", children: errors.lastName?.message }), _jsx("label", { htmlFor: "email", children: "Email *" }), _jsx("input", { id: "email", type: "email", className: "register__input", "aria-required": "true", "aria-invalid": !!errors.email, "aria-describedby": "email-error", ...register('email') }), _jsx("span", { id: "email-error", role: "alert", className: "register__error", children: errors.email?.message }), _jsx("label", { htmlFor: "password", children: "Has\u0142o *" }), _jsx("input", { id: "password", type: "password", className: "register__input", "aria-required": "true", "aria-invalid": !!errors.password, "aria-describedby": "password-error", ...register('password') }), _jsx("span", { id: "password-error", role: "alert", className: "register__error", children: errors.password?.message }), _jsxs("p", { "aria-live": "polite", className: `password-strength password-strength--${strength}`, children: ["Si\u0142a has\u0142a: ", strength] }), _jsx("label", { htmlFor: "confirmPassword", children: "Powt\u00F3rz has\u0142o *" }), _jsx("input", { id: "confirmPassword", type: "password", className: "register__input", "aria-required": "true", "aria-invalid": !!errors.confirmPassword, "aria-describedby": "confirmPassword-error", ...register('confirmPassword') }), _jsx("span", { id: "confirmPassword-error", role: "alert", className: "register__error", children: errors.confirmPassword?.message })] }));
+}

@@ -86,14 +86,17 @@ export default function RegisterForm() {
 
     const result = schema.safeParse(values);
 
-    if (!result.success) {
-      result.error.errors.forEach((err) => {
-        methods.setError(err.path[0] as any, {
-          message: err.message,
-        });
-      });
-      return;
-    }
+if (!result.success) {
+  const error = result.error;
+
+  error.issues.forEach((err) => {
+    methods.setError(err.path[0] as any, {
+      message: err.message,
+    });
+  });
+
+  return;
+}
 
     setStep((s) => s + 1);
   };
