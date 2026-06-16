@@ -1,6 +1,6 @@
 // src/components/TodoList.tsx
 
-import { List, Card, CardContent } from '@mui/material';
+import { Card, CardContent } from '@mui/material';
 import { useTodo } from '../context/TodoContext';
 import { TodoItem } from './TodoItem';
 

@@ -37,10 +37,10 @@ export const step2Schema = z.object({
 });
 
 export const step3Schema = z.object({
-  rodo: z.literal(true, {
-    errorMap: () => ({
-      message: 'Musisz zaakceptować RODO',
-    }),
+rodo: z
+  .boolean()
+  .refine((v) => v === true, {
+    message: 'Musisz zaakceptować RODO',
   }),
 });
 

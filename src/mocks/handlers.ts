@@ -1,22 +1,31 @@
-http.post('/api/register', async ({ request }) => {
-  const body = (await request.json()) as {
-    email: string;
-    firstName?: string;
-    lastName?: string;
-    password?: string;
-  };
+import { http, HttpResponse } from 'msw';
 
-  console.log('MSW REGISTER:', body);
+export const handlers = [
+  http.get('/api/user', () => {
+    return HttpResponse.json({
+      email: 'demo@test.com',
+    });
+  }),
 
-  if (body?.email === 'error@test.com') {
-    return HttpResponse.json(
-      { message: 'Błąd rejestracji' },
-      { status: 400 }
-    );
-  }
+  http.post('/api/register', async ({ request }) => {
+    const body = (await request.json()) as {
+      email?: string;
+    };
 
-  return HttpResponse.json({
-    success: true,
-    id: crypto.randomUUID(),
-  });
-});
+    if (body.email === 'error@test.com') {
+      return HttpResponse.json(
+        {
+          message: 'Błąd rejestracji',
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    return HttpResponse.json({
+      success: true,
+      id: crypto.randomUUID(),
+    });
+  }),
+];
