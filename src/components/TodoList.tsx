@@ -18,7 +18,7 @@ export const TodoList = () => {
   return (
     <section aria-label="Lista zadań">
 
-      {/* ✅ ARIA LIVE REGION (jak w przykładzie SearchResults) */}
+      
       <div
         role="status"
         aria-live="polite"
@@ -29,7 +29,7 @@ export const TodoList = () => {
         {!isEmpty && `Liczba zadań: ${filtered.length}`}
       </div>
 
-      {/* ✅ UI zostaje MUI */}
+      
 <Card>
   <CardContent>
 

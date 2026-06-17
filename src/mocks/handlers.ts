@@ -8,6 +8,7 @@ export const handlers = [
   }),
 
   http.post('/api/register', async ({ request }) => {
+     
     const body = (await request.json()) as {
       email?: string;
     };
