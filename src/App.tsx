@@ -6,6 +6,8 @@ import { Nav } from './Nav';
 
 import AppContent from './AppContent';
 import RegisterPage from './pages/RegisterPage';
+import ProfilePage from './pages/ProfilePage';
+import CategoriesPage from './pages/CategoriesPage';
 
 import { PageTransition } from './components/PageTransition';
 
@@ -14,7 +16,6 @@ export default function App() {
 
   return (
     <TodoProvider>
-      {/* SKIP LINK */}
       <a href="#main-content" className="skip-link">
         Przejdź do treści
       </a>
@@ -23,11 +24,8 @@ export default function App() {
         <Nav />
       </header>
 
-      <main id="main-content">
-
-        {/* 🔥 ANIMACJE ROUTER */}
+      <main id="main-content" className="page-container">
         <AnimatePresence mode="wait">
-
           <Routes location={location} key={location.pathname}>
 
             <Route
@@ -48,34 +46,27 @@ export default function App() {
               }
             />
 
+            <Route
+              path="/profile"
+              element={
+                <PageTransition>
+                  <ProfilePage />
+                </PageTransition>
+              }
+            />
+
+            <Route
+              path="/categories"
+              element={
+                <PageTransition>
+                  <CategoriesPage />
+                </PageTransition>
+              }
+            />
+
           </Routes>
-
         </AnimatePresence>
-
       </main>
     </TodoProvider>
   );
 }
-
-/*//
-import { TodoProvider } from './context/TodoContext';
-import { DashboardLayout } from './components/dashboard/DashboardLayout';
-import { StatsGrid } from './components/dashboard/StatsGrid';
-
-
-function AppContent() {
-  return (
-    <DashboardLayout>
-      <StatsGrid />
-    </DashboardLayout>
-  );
-}
-
-export default function App() {
-  return (
-    <TodoProvider>
-      <AppContent />
-    </TodoProvider>
-  );
-}
-  //*/

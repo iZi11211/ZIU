@@ -1,13 +1,43 @@
-export interface Todo {
+export type Todo = {
   id: string;
   title: string;
   completed: boolean;
-}
 
-export type Filter = 'all' | 'active' | 'completed';
+  // potrzebne bo używasz w reducerze
+  createdAt: Date;
+};
 
 export type Action =
-  | { type: 'ADD'; payload: string }
-  | { type: 'DELETE'; payload: string }
-  | { type: 'TOGGLE'; payload: string }
-  | { type: 'EDIT'; payload: { id: string; title: string } };
+  | {
+      type: 'ADD';
+      payload: {
+        title: string;
+      };
+    }
+
+  | {
+      type: 'DELETE';
+      payload: {
+        id: string;
+      };
+    }
+
+  | {
+      type: 'TOGGLE';
+      payload: {
+        id: string;
+      };
+    }
+
+  | {
+      type: 'EDIT';
+      payload: {
+        id: string;
+        title: string;
+      };
+    };
+
+    export type Filter =
+  | 'all'
+  | 'active'
+  | 'completed';

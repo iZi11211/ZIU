@@ -1,4 +1,6 @@
 import { useState, useRef } from 'react';
+import { motion } from 'framer-motion';
+
 import {
   Checkbox,
   IconButton,
@@ -20,69 +22,91 @@ export const TodoItem = ({ todo }: { todo: Todo }) => {
 
   const [editing, setEditing] = useState(false);
   const [text, setText] = useState(todo.title);
-
   const [confirmOpen, setConfirmOpen] = useState(false);
 
   const deleteBtnRef = useRef<HTMLButtonElement>(null);
 
   const handleSave = () => {
     if (!text.trim()) return;
-    dispatch({ type: 'EDIT', payload: { id: todo.id, title: text } });
+
+    dispatch({
+      type: 'EDIT',
+      payload: { id: todo.id, title: text },
+    });
+
     setEditing(false);
   };
 
   const handleDelete = () => {
-    dispatch({ type: 'DELETE', payload: { id: todo.id } });
+    dispatch({
+      type: 'DELETE',
+      payload: { id: todo.id },
+    });
+
     setConfirmOpen(false);
   };
 
   return (
     <>
       {/* ================= ITEM ================= */}
-      <ListItem
-        secondaryAction={
-          <IconButton
-            ref={deleteBtnRef}
-            edge="end"
-            onClick={() => setConfirmOpen(true)}
-            aria-label="Usuń zadanie"
-          >
-            <DeleteIcon />
-          </IconButton>
-        }
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
       >
-        <Stack direction="row" alignItems="center" spacing={2} width="100%">
+        <ListItem
+          className="todo-item"
+          secondaryAction={
+            <IconButton
+              ref={deleteBtnRef}
+              edge="end"
+              onClick={() => setConfirmOpen(true)}
+              aria-label="Usuń zadanie"
+            >
+              <DeleteIcon />
+            </IconButton>
+          }
+        >
+          <Stack direction="row" alignItems="center" spacing={2} width="100%">
 
-          <Checkbox
-            checked={todo.completed}
-            onChange={() =>
-              dispatch({ type: 'TOGGLE', payload: { id: todo.id } })
-            }
-            aria-label="Oznacz jako wykonane"
-          />
-
-          {editing ? (
-            <TextField
-              fullWidth
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              onBlur={handleSave}
-              onKeyDown={(e) => e.key === 'Enter' && handleSave()}
-              autoFocus
+            {/* CHECKBOX */}
+            <Checkbox
+              checked={todo.completed}
+              onChange={() =>
+                dispatch({
+                  type: 'TOGGLE',
+                  payload: { id: todo.id },
+                })
+              }
+              aria-label="Oznacz jako wykonane"
             />
-          ) : (
-            <ListItemText
-              primary={todo.title}
-              onDoubleClick={() => setEditing(true)}
-              sx={{
-                textDecoration: todo.completed ? 'line-through' : 'none',
-                cursor: 'pointer',
-              }}
-            />
-          )}
 
-        </Stack>
-      </ListItem>
+            {/* EDIT / VIEW */}
+            {editing ? (
+              <TextField
+                fullWidth
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                onBlur={handleSave}
+                onKeyDown={(e) => e.key === 'Enter' && handleSave()}
+                autoFocus
+              />
+            ) : (
+              <ListItemText
+                primary={todo.title}
+                onDoubleClick={() => setEditing(true)}
+                sx={{
+                  textDecoration: todo.completed ? 'line-through' : 'none',
+                  opacity: todo.completed ? 0.6 : 1,
+                  cursor: 'pointer',
+                  transition: '0.2s',
+                }}
+              />
+            )}
+
+          </Stack>
+        </ListItem>
+      </motion.div>
 
       {/* ================= MODAL DELETE ================= */}
       {confirmOpen && (
@@ -101,7 +125,6 @@ export const TodoItem = ({ todo }: { todo: Todo }) => {
               className="modal-content"
               onClick={(e) => e.stopPropagation()}
             >
-
               <h2 id="delete-title">Usunąć zadanie?</h2>
 
               <p>{todo.title}</p>
@@ -122,7 +145,6 @@ export const TodoItem = ({ todo }: { todo: Todo }) => {
                   Anuluj
                 </Button>
               </div>
-
             </div>
           </FocusTrap>
         </div>

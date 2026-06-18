@@ -49,12 +49,13 @@ export const AddTodoForm = () => {
         }}
       />
 
-      <Button
-        variant="contained"
-        onClick={handleAdd}
-      >
-        Dodaj
-      </Button>
+<Button
+  variant="contained"
+  onClick={handleAdd}
+  className="add-todo-btn"
+>
+  Dodaj
+</Button>
     </Stack>
   );
 };

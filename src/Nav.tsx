@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  //const location = useLocation();
 
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
   };
 
   return (
@@ -28,10 +33,30 @@ export const Nav = () => {
 
       {/* MENU */}
       <ul className={`nav__menu ${isOpen ? "nav__menu--open" : ""}`}>
-        <li><Link to="/">Zadania</Link></li>
-        <li><Link to="/register">Rejestracja</Link></li>
-        <li><a href="#">Kategorie</a></li>
-        <li><a href="#">Profil</a></li>
+
+        <li>
+          <Link to="/" onClick={handleClose}>
+            Zadania
+          </Link>
+        </li>
+
+        <li>
+          <Link to="/register" onClick={handleClose}>
+            Rejestracja
+          </Link>
+        </li>
+
+<li>
+  <Link to="/categories" onClick={handleClose}>
+    Kategorie
+  </Link>
+</li>
+        <li>
+          <Link to="/profile" onClick={handleClose}>
+            Profil
+          </Link>
+        </li>
+
       </ul>
 
     </nav>

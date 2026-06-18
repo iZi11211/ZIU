@@ -59,7 +59,7 @@ export default function RegisterForm() {
 
   const {
     handleSubmit,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
     setError,
   } = methods;
 

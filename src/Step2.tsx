@@ -20,35 +20,64 @@ export default function Step2() {
     <div className="step2">
 
       {/* ================= CATEGORIES ================= */}
+
       <div className="step2__block">
 
         <label className="step2__label">
           Kategorie *
         </label>
 
-        {fields.map((field, index) => (
-          <div key={field.id} className="flex gap-2 mb-2">
+        {fields.map((field, index) => {
+          const fieldError =
+            Array.isArray(errors.categories)
+              ? errors.categories[index]
+              : undefined;
 
-            <input
-              id={`category-${index}`}
-              className="register__input"
-              placeholder={`Kategoria ${index + 1}`}
-              aria-required="true"
-              aria-invalid={!!errors.categories?.[index]}
-              aria-describedby={`category-${index}-error`}
-              {...register(`categories.${index}` as const)}
-            />
-
-            <button
-              type="button"
-              aria-label={`Usuń kategorię ${index + 1}`}
-              onClick={() => remove(index)}
+          return (
+            <div
+              key={field.id}
+              className="flex gap-2 mb-2"
             >
-              Usuń
-            </button>
+              <input
+                id={`category-${index}`}
+                className="register__input"
+                placeholder={`Kategoria ${index + 1}`}
 
-          </div>
-        ))}
+                aria-required="true"
+
+                aria-invalid={!!fieldError}
+
+                aria-describedby={
+                  fieldError
+                    ? `category-${index}-error`
+                    : undefined
+                }
+
+                {...register(
+                  `categories.${index}` as const
+                )}
+              />
+
+              <button
+                type="button"
+                aria-label={`Usuń kategorię ${index + 1}`}
+                onClick={() => remove(index)}
+              >
+                Usuń
+              </button>
+
+              {fieldError?.message && (
+                <span
+                  id={`category-${index}-error`}
+                  role="alert"
+                  className="register__error"
+                >
+                  {String(fieldError.message)}
+                </span>
+              )}
+            </div>
+          );
+        })}
 
         <button
           type="button"
@@ -58,19 +87,19 @@ export default function Step2() {
           + Dodaj kategorię
         </button>
 
-        {/* GLOBAL ERROR (min 1 category) */}
         {categoryError && (
           <span
             role="alert"
             className="register__error"
           >
-            {categoryError}
+            {String(categoryError)}
           </span>
         )}
 
       </div>
 
       {/* ================= NOTIFICATIONS ================= */}
+
       <div className="step2__block">
 
         <label className="step2__label">
@@ -80,8 +109,9 @@ export default function Step2() {
         <label className="step2__checkbox">
           <input
             type="checkbox"
-            aria-describedby="notif-email-help"
-            {...register('notifications.email')}
+            {...register(
+              'notifications.email'
+            )}
           />
           Email
         </label>
@@ -89,8 +119,9 @@ export default function Step2() {
         <label className="step2__checkbox">
           <input
             type="checkbox"
-            aria-describedby="notif-push-help"
-            {...register('notifications.push')}
+            {...register(
+              'notifications.push'
+            )}
           />
           Push
         </label>
@@ -98,6 +129,7 @@ export default function Step2() {
       </div>
 
       {/* ================= NEWSLETTER ================= */}
+
       <div className="step2__block">
 
         <label className="step2__checkbox">
@@ -105,6 +137,7 @@ export default function Step2() {
             type="checkbox"
             {...register('newsletter')}
           />
+
           Newsletter (opcjonalnie)
         </label>
 
