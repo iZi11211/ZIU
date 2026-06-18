@@ -14,7 +14,12 @@ Projekt został przygotowany w ramach zajęć laboratoryjnych.
 ---
 
 ## 🚀 Demo
-🔗 https://ziu-bsvv9zzuv-wiktorwarmuz33-5909s-projects.vercel.app
+🔗 https://ziu-l78e5gueg-wiktorwarmuz33-5909s-projects.vercel.app
+
+---
+
+## ✏️ Figma
+🔗 https://www.figma.com/design/Ma0ugKoiWJazzJfxRr74Z1/ZIU?node-id=0-1&t=W3S1RuIxAlvYWXqK-1
 
 ---
 
