@@ -14,7 +14,11 @@ import '/index.css';
 import './typography.css';
 
 async function enableMocking() {
-  if (import.meta.env.DEV) {
+  const enabled =
+    import.meta.env.DEV ||
+    import.meta.env.VITE_ENABLE_MSW === 'true';
+
+  if (enabled) {
     const { worker } = await import('./mocks/browser');
 
     await worker.start({
